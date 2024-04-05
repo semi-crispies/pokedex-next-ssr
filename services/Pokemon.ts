@@ -5,16 +5,16 @@ export default class Pokemon {
         this.data = data;
     }
 
-    public getName() {
+    public getName(): string {
         return this.data.name;
     }
 
-    public getWeight() {
-        return this.data.weight;
+    public getWeight(): number {
+        return this.data.weight / 10;
     }
 
-    public getHeight() {
-        return this.data.height;
+    public getHeight(): number {
+        return this.data.height / 10;
     }
 
     public getSprite(type: string): string {
@@ -28,7 +28,7 @@ export default class Pokemon {
         }
     }
 
-    public getPokemonType() {
+    public getPokemonType(): string[] {
         let types = [];
         for (const type of this.data.types) {
             types.push(type.type.name);
