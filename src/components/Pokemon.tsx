@@ -5,9 +5,13 @@ import { getPokemon } from "@/services/fetch";
 import React from "react";
 import { capitalizeFirstLetter } from "@/services/utils";
 
-export default async function Pokemon() {
+type ID = {
+    id: string,
+};
 
-    const pokemon = await getPokemon("10");
+export default async function Pokemon({id}: ID) {
+
+    const pokemon = await getPokemon(id);
 
     return (
         <article>
