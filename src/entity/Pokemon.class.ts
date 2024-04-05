@@ -1,4 +1,4 @@
-import { PokeapiPkmn } from "../services/fetch";
+import { PokeapiPkmn } from "@/services/fetch";
 
 export type PokemonSprites = {
     dream: string
@@ -7,12 +7,12 @@ export type PokemonSprites = {
 };
 
 export default class Pokemon {
-    private id: number;
-    private name: string;
-    private weight: number;
-    private height: number;
-    private types: string[];
-    private sprites: PokemonSprites;
+    private readonly id: number;
+    private readonly name: string;
+    private readonly weight: number;
+    private readonly height: number;
+    private readonly types: string[];
+    private readonly sprites: PokemonSprites;
 
     constructor(data: PokeapiPkmn) {
         this.id = data.id;

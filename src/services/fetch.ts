@@ -27,7 +27,7 @@ export type PokeapiPkmn = {
     }
 }
 
-export async function getPokemon(id: string) {
+export async function getPokemon(id: string): Promise<Pokemon> {
     const res: Response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const pkmnData: PokeapiPkmn = await res.json();
 

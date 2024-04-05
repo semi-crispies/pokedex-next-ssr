@@ -1,17 +1,17 @@
 'use server';
 
 import Image from 'next/image'
-import { getPokemon } from "../services/fetch";
+import { getPokemon } from "@/services/fetch";
 import React from "react";
-import { capitalizeFirstLetter } from "../services/utils";
+import { capitalizeFirstLetter } from "@/services/utils";
 
 export default async function Pokemon() {
 
-    const pokemon = await getPokemon("1");
+    const pokemon = await getPokemon("10");
 
     return (
         <article>
-            <Image src={pokemon.getSprite().default}
+            <Image src={pokemon.getSprite().dream}
                    width={200}
                    height={200}
                    alt={`Picture of ${pokemon.getName()}`}/>
