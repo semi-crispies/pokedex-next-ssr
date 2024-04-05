@@ -1,40 +1,54 @@
-export default class Pokemon {
-    private data: object;
+import { PokeapiPkmn } from "./fetch";
 
-    constructor(data: object) {
-        this.data = data;
+export type PokemonSprites = {
+    dream: string
+    shiny: string
+    default: string
+};
+
+export default class Pokemon {
+    private id: number;
+    private name: string;
+    private weight: number;
+    private height: number;
+    private types: string[];
+    private sprites: PokemonSprites;
+
+    constructor(data: PokeapiPkmn) {
+        this.id = data.id;
+        this.name = data.name;
+        this.weight = data.weight;
+        this.height = data.height;
+        this.types = data.types.map((types) => types.type.name);
+        this.sprites = {
+            dream: data.sprites.other.dream_world.front_default,
+            shiny: data.sprites.other.home.front_shiny,
+            default: data.sprites.front_default,
+        };
+    }
+
+    public getId(): number {
+        return this.id;
     }
 
     public getName(): string {
-        return this.data.name;
+        return this.name;
     }
 
-    public getWeight(): number {
-        return this.data.weight / 10;
+    public getWeightKg(): number {
+        return this.weight / 10;
     }
 
-    public getHeight(): number {
-        return this.data.height / 10;
+    public getHeightMeter(): number {
+        return this.height / 10;
     }
 
-    public getSprite(type: string): string {
-        switch (type) {
-            case 'dream':
-                return this.data.sprites.other.dream_world.front_default;
-            case 'shiny':
-                return this.data.sprites.other.home.front_shiny;
-            default:
-                return this.data.sprites.front_default;
-        }
+    public getSprite(): PokemonSprites {
+        return this.sprites;
     }
 
     public getPokemonType(): string[] {
-        let types = [];
-        for (const type of this.data.types) {
-            types.push(type.type.name);
-        }
-
-        return types;
+        return this.types;
     }
 
 }
