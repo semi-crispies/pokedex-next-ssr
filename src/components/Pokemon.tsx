@@ -6,7 +6,6 @@ import React from "react";
 export default async function Pokemon() {
 
     const pokemon = await getPokemon("158");
-    console.log(pokemon);
 
     return (
         <article>
@@ -15,7 +14,10 @@ export default async function Pokemon() {
                    height={200}
                    alt={`Picture of ${pokemon.name}`}/>
 
-            <h1>{pokemon.name}</h1>
+            <h1>{pokemon.id} {pokemon.name}</h1>
+
+            <span>{pokemon.height}</span>
+            <span>{pokemon.weight}</span>
 
             <ul>
                 {(pokemon.types).map((type: string, index: React.Key) => {
