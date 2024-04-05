@@ -1,9 +1,9 @@
 'use server';
 
 import Image from 'next/image'
-import { getPokemon } from "../../services/fetch";
+import { getPokemon } from "../services/fetch";
 import React from "react";
-import { capitalizeFirstLetter } from "../../services/utils";
+import { capitalizeFirstLetter } from "../services/utils";
 
 export default async function Pokemon() {
 

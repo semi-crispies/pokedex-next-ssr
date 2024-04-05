@@ -1,4 +1,4 @@
-import { PokeapiPkmn } from "./fetch";
+import { PokeapiPkmn } from "../services/fetch";
 
 export type PokemonSprites = {
     dream: string

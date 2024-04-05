@@ -1,4 +1,4 @@
-import Pokemon from "./Pokemon";
+import Pokemon from "../entity/Pokemon.class";
 
 export type PokeapiTypes = {
     slot: number
