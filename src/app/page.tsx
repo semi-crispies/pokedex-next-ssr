@@ -1,20 +1,22 @@
 import Image from "next/image";
 import Button from "@/components/Button";
-import FetchPokeApi from "@/components/FetchPokeApi";
+import Pokemon from "@/components/Pokemon";
 
 export default function Home() {
 
     return (
-        <main className="">
+        <main className="flex flex-col items-center justify-center py-8">
 
-            <FetchPokeApi/>
-
-            <h1 className="flex items-center justify-center py-8">
+            <h1 className="">
                 <Image src="/pokelogo.svg" alt="Pokemon Logo" width={500} height={200} priority/>
             </h1>
 
-            <Button label={"Jaki"}/>
-            <Button label={"Vitkov"} classList="bg-blue-400"/>
+            <Pokemon/>
+
+            <div>
+                <Button label={"Previous"} classList="bg-blue-400"/>
+                <Button label={"Next"} classList="bg-blue-400"/>
+            </div>
 
         </main>
     );
