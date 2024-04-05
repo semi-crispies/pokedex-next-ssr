@@ -1,7 +1,9 @@
 'use server';
+
 import Image from 'next/image'
 import {getPokemon} from "../../services/fetch";
 import React from "react";
+import {capitalizeFirstLetter} from "../../services/utils";
 
 export default async function Pokemon() {
 
@@ -14,14 +16,14 @@ export default async function Pokemon() {
                    height={200}
                    alt={`Picture of ${pokemon.name}`}/>
 
-            <h1>{pokemon.id} {pokemon.name}</h1>
+            <h1>#{pokemon.id} - {capitalizeFirstLetter(pokemon.name)}</h1>
 
-            <span>{pokemon.height}</span>
-            <span>{pokemon.weight}</span>
+            <div>{pokemon.height} m</div>
+            <div>{pokemon.weight} kg</div>
 
             <ul>
                 {(pokemon.types).map((type: string, index: React.Key) => {
-                    return <li key={index}>{type}</li>
+                    return <li key={index}>{capitalizeFirstLetter(type)}</li>
                 })}
             </ul>
         </article>
