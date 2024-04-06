@@ -1,4 +1,4 @@
-import { PokeapiPkmn } from "@/services/fetch";
+import {PokeapiPkmn, PokeapiTypes} from "@/services/fetch";
 
 export type PokemonSprites = {
     dream: string
@@ -6,20 +6,26 @@ export type PokemonSprites = {
     default: string
 };
 
+export enum TYPES {
+    normal = "normal",
+    fighting = "fighting",
+    grass = "grass"
+}
+
 export default class Pokemon {
     private readonly id: number;
     private readonly name: string;
     private readonly weight: number;
     private readonly height: number;
-    private readonly types: string[];
+    private readonly types: TYPES[];
     private readonly sprites: PokemonSprites;
 
     constructor(data: PokeapiPkmn) {
         this.id = data.id;
         this.name = data.name;
-        this.weight = data.weight;
-        this.height = data.height;
-        this.types = data.types.map((types) => types.type.name);
+        this.weight = data.weight / 10;
+        this.height = data.height / 10;
+        this.types = data.types.map((types: PokeapiTypes) => types.type.name);
         this.sprites = {
             dream: data.sprites.other.dream_world.front_default,
             shiny: data.sprites.other.home.front_shiny,
@@ -36,19 +42,18 @@ export default class Pokemon {
     }
 
     public getWeightKg(): number {
-        return this.weight / 10;
+        return this.weight;
     }
 
     public getHeightMeter(): number {
-        return this.height / 10;
+        return this.height;
     }
 
     public getSprite(): PokemonSprites {
         return this.sprites;
     }
 
-    public getPokemonType(): string[] {
+    public getPokemonType(): TYPES[] {
         return this.types;
     }
-
 }
