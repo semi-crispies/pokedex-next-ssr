@@ -28,7 +28,7 @@ export enum TYPES {
 }
 
 export default class Pokemon {
-    private readonly id: number;
+    private readonly id: string;
     private readonly name: string;
     private readonly weight: number;
     private readonly height: number;
@@ -36,7 +36,7 @@ export default class Pokemon {
     private readonly sprites: PokemonSprites;
 
     constructor(data: PokeapiPkmn) {
-        this.id = data.id;
+        this.id = data.id.toString().padStart(3, '0');
         this.name = data.name;
         this.weight = data.weight / 10;
         this.height = data.height / 10;
@@ -48,7 +48,7 @@ export default class Pokemon {
         };
     }
 
-    public getId(): number {
+    public getId(): string {
         return this.id;
     }
 
