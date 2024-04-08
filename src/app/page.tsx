@@ -11,7 +11,7 @@ export default function Home() {
                 <Image src="/pokelogo.svg" alt="Pokemon Logo" width={500} height={200} priority/>
             </h1>
 
-            <Pokemon id="68"/>
+            <Pokemon id="94"/>
 
             <div>
                 <Button label={"Previous"} classList="bg-blue-400"/>
