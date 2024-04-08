@@ -7,7 +7,7 @@ interface TypeProps {
 
 export default function Type (params : TypeProps) {
     return (
-        <div className={`rounded-lg mt-6 py-2 px-4 border ${params.classList}`}>
+        <div className={`rounded-full border-2 text-center ${params.classList}`}>
             {params.text}
         </div>
     );

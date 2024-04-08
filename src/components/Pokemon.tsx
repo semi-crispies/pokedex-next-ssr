@@ -15,7 +15,7 @@ export default async function Pokemon({id}: ID) {
     const pokemon = await getPokemon(id);
 
     return (
-        <article>
+        <article className="flex-col justify-center w-72">
             <Image src={pokemon.getSprite().dream}
                    width={200}
                    height={200}
@@ -23,13 +23,15 @@ export default async function Pokemon({id}: ID) {
 
             <h1>#{pokemon.getId()} - {capitalizeFirstLetter(pokemon.getName())}</h1>
 
-            <div>{pokemon.getHeightMeter()} m</div>
-            <div>{pokemon.getWeightKg()} kg</div>
+            <div className="flex flex-row-reverse gap-2">
+                <span>{pokemon.getHeightMeter()} m</span>
+                <span>{pokemon.getWeightKg()} kg</span>
+            </div>
 
-            <ul>
+            <ul className="flex justify-center p-4">
                 {(pokemon.getPokemonType()).map((type: string, index: React.Key) => {
                     return <li key={index}>
-                        <Type text={capitalizeFirstLetter(type)} classList={type}/>
+                        <Type text={capitalizeFirstLetter(type)} classList={`w-24 ${type}`}/>
                     </li>
                 })}
             </ul>
