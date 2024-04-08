@@ -10,7 +10,7 @@ const config: Config = {
         extend: {
             backgroundColor: {
                 normal: {
-                    primary: "#6231af",
+                    primary: "#A8A77A",
                 },
                 fighting: {
                     primary: "#C22E28",
