@@ -13,9 +13,9 @@ export default function Home() {
 
             <Pokemon id="94"/>
 
-            <div>
-                <Button label={"Previous"} classList="bg-blue-400"/>
-                <Button label={"Next"} classList="bg-blue-400"/>
+            <div className="flex space-x-24">
+                <Button label={"Previous"} classList="bg-gray-300 hover:bg-gray-600 hover:text-white"/>
+                <Button label={"Next"} classList="bg-gray-300 hover:bg-gray-600 hover:text-white"/>
             </div>
 
         </main>
