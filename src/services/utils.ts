@@ -2,7 +2,7 @@ export function capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export function applyTypeColor(type: string): string {
+export function applyTypeColor2(type: string): string {
 
     switch (type) {
         case 'normal':
@@ -37,6 +37,8 @@ export function applyTypeColor(type: string): string {
             return 'bg-ice-primary';
         case 'dragon':
             return 'bg-dragon-primary';
+        case 'dark':
+            return 'bg-dark-primary'
         case 'fairy':
             return 'bg-fairy-primary';
         default:
