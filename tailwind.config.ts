@@ -8,62 +8,7 @@ const config: Config = {
     ],
     theme: {
         extend: {
-            backgroundColor: {
-                normal: {
-                    primary: "#A8A77A",
-                },
-                fighting: {
-                    primary: "#C22E28",
-                },
-                flying: {
-                    primary: "#A98FF3",
-                },
-                poison: {
-                    primary: "#A33EA1",
-                },
-                ground: {
-                    primary: "#E2BF65",
-                },
-                rock: {
-                    primary: "#B6A136",
-                },
-                bug: {
-                    primary: "#A6B91A",
-                },
-                ghost: {
-                    primary: "#735797",
-                },
-                steel: {
-                    primary: "#B7B7CE",
-                },
-                fire: {
-                    primary: "#EE8130",
-                },
-                water: {
-                    primary: "#6390F0",
-                },
-                grass: {
-                    primary: "#7AC74C",
-                },
-                electric: {
-                    primary: "#F7D02C",
-                },
-                psychic: {
-                    primary: "#F95587",
-                },
-                ice: {
-                    primary: "#96D9D6",
-                },
-                dragon: {
-                    primary: "#6F35FC",
-                },
-                dark: {
-                    primary: "#705746",
-                },
-                fairy: {
-                    primary: "#D685AD",
-                },
-            },
+            backgroundColor: {},
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
                 "gradient-conic":
