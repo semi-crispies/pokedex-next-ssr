@@ -2,18 +2,18 @@ export function capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export function PreviousIndex(index: number, setIndex: any): void {
+export function PreviousNumber(number: number, setNumber: any): void {
 
-    if (index > 1) {
-        setIndex(index - 1);
+    if (number > 1) {
+        setNumber(number - 1);
     }
 
 }
 
-export function NextIndex(index: number, setIndex: any): void {
+export function NextNumber(number: number, setNumber: any): void {
 
-    if (index < 151) {
-        setIndex(index + 1);
+    if (number < 151) {
+        setNumber(number + 1);
     }
 
 }

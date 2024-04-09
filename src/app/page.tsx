@@ -4,7 +4,7 @@ import Image from "next/image";
 import Button from "@/components/Button";
 //import Pokemon from "@/components/Pokemon";
 import {useState} from "react";
-import {NextIndex, PreviousIndex} from "@/services/utils";
+import {NextNumber, PreviousNumber} from "@/services/utils";
 
 export default function Home() {
 
@@ -23,9 +23,9 @@ export default function Home() {
 
             <div className="flex space-x-24">
                 <Button label={"Previous"} classList="bg-gray-300 hover:bg-gray-600 hover:text-white"
-                        onClick={() => PreviousIndex(pokemonID, setPokemonID)}/>
+                        onClick={() => PreviousNumber(pokemonID, setPokemonID)}/>
                 <Button label={"Next"} classList="bg-gray-300 hover:bg-gray-600 hover:text-white"
-                        onClick={() => NextIndex(pokemonID, setPokemonID)}/>
+                        onClick={() => NextNumber(pokemonID, setPokemonID)}/>
             </div>
 
         </main>
