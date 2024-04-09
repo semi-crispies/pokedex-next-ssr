@@ -8,7 +8,7 @@ import {NextIndex, PreviousIndex} from "@/services/utils";
 
 export default function Home() {
 
-    const [index, setIndex] = useState(1);
+    const [pokemonID, setPokemonID] = useState(1);
 
     return (
         <main className="flex flex-col items-center justify-center py-8">
@@ -19,13 +19,13 @@ export default function Home() {
 
             {/*<Pokemon id="94"/>*/}
 
-            <div>INDEX {index}</div>
+            <div>Pokemon ID : {pokemonID}</div>
 
             <div className="flex space-x-24">
                 <Button label={"Previous"} classList="bg-gray-300 hover:bg-gray-600 hover:text-white"
-                        onClick={() => PreviousIndex(index, setIndex)}/>
+                        onClick={() => PreviousIndex(pokemonID, setPokemonID)}/>
                 <Button label={"Next"} classList="bg-gray-300 hover:bg-gray-600 hover:text-white"
-                        onClick={() => NextIndex(index, setIndex)}/>
+                        onClick={() => NextIndex(pokemonID, setPokemonID)}/>
             </div>
 
         </main>
