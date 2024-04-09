@@ -1,5 +1,3 @@
-import Pokemon from "../entity/Pokemon.class";
-
 export type PokeapiTypes = {
     slot: number
     type: {
@@ -27,13 +25,6 @@ export type PokeapiPkmn = {
     }
 }
 
-export async function getPokemon(id: string): Promise<Pokemon> {
-    const res: Response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    const pkmnData: PokeapiPkmn = await res.json();
-
-    if (!res.ok) {
-        throw new Error(`Error blablabla`)
-    }
-
-    return new Pokemon(pkmnData);
+export type PokeapiPkmnData = {
+    pokemonData: PokeapiPkmn
 }
