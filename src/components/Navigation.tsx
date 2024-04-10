@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Navigation() {
     return (
-        <nav className="px-24">
+        <nav className="float-left w-0 relative left-16">
             <ul>
                 <li><Link href="/" className="flex-grow-0">Home</Link></li>
 

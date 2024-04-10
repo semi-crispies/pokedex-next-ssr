@@ -18,7 +18,7 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
         <html lang="en">
         <body className={inter.className}>
 
-        <header className="flex justify-center pt-8">
+        <header className="flex justify-center py-8">
             <h1>
                 <Image src="/pokelogo.svg" alt="Pokemon Logo" width={0} height={0}
                        style={{width: 'auto', height: '150px'}} priority/>
