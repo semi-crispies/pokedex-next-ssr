@@ -4,19 +4,14 @@ import Button from "@/components/Button";
 import Pokemon from "@/app/pokedex/components/Pokemon";
 import {useEffect, useState} from "react";
 import {NextNumber, PreviousNumber} from "@/services/utils";
-import {PokeapiPkmn} from "@/app/pokedex/interfaces/pokeapi";
+import {PokeapiPkmn, PokemonEntity} from "@/app/pokedex/interfaces/pokeapi";
 import {getPokemon} from "@/app/pokedex/providers/fetch";
 
 export default function Home() {
 
     const [pokemonID, setPokemonID] = useState(1);
-    const [pokemon, setPokemon] = useState<PokeapiPkmn>({
-        height: 0,
-        id: 0,
-        name: "",
-        sprites: {front_default: "", other: {dream_world: {front_default: ""}, home: {front_shiny: ""}}},
-        types: [],
-        weight: 0
+    const [pokemon, setPokemon] = useState<PokemonEntity>({
+        height: 0, id: 0, name: "", sprites: "", types: [], weight: 0
     });
 
     useEffect(() => {

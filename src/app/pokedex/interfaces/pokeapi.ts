@@ -25,6 +25,15 @@ export type PokeapiPkmn = {
     }
 }
 
-export type PokeapiPkmnData = {
-    pokemonData: PokeapiPkmn
+export type PokemonEntity = {
+    id: number,
+    name: string,
+    weight: number,
+    height: number,
+    types: string[],
+    sprites: string,
+}
+
+export type PokemonEntityData = {
+    pokemonData: PokemonEntity
 }
