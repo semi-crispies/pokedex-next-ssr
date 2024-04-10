@@ -10,7 +10,7 @@ export default function Pokemon(pokemon: PokemonEntityData) {
     return (
         <article className="flex flex-col items-center w-72">
 
-            <Toggle classList="self-end" iconName="sparkles" label=""/>
+            <Toggle classList="self-end mb-4" iconName="sparkles" label=""/>
 
             <figure className="h-64 mb-14">
                 <Image src={pokemon.pokemonData.sprites} width={0} height={0} priority
