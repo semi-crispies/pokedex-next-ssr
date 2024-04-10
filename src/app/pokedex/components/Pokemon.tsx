@@ -8,9 +8,9 @@ import React from "react";
 export default function Pokemon(pokemon: PokemonEntityData) {
     return (
         <article className="flex flex-col items-center w-72">
-            <figure className="h-40">
-                <Image src={pokemon.pokemonData.sprites} width={200} height={200}
-                       alt={`Picture of ${pokemon.pokemonData.name}`}/>
+            <figure className="h-64 mb-14">
+                <Image src={pokemon.pokemonData.sprites} width={0} height={0} priority
+                       alt={`Picture of ${pokemon.pokemonData.name}`} style={{width: 'auto', height: '300px'}}/>
             </figure>
 
             <h1 className="w-full capitalize">
