@@ -9,7 +9,7 @@ import {getPokemon} from "@/app/pokedex/providers/fetch";
 
 export default function Home() {
 
-    const [pokemonID, setPokemonID] = useState(1);
+    const [pokemonID, setPokemonID] = useState<number>(1);
     const [pokemon, setPokemon] = useState<PokemonEntity>({
         height: 0, id: 0, name: "", sprites: "", types: [], weight: 0
     });

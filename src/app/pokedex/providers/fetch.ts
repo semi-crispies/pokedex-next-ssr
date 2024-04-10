@@ -1,6 +1,7 @@
 import {PokeapiPkmn, PokeapiTypes, PokemonEntity} from "@/app/pokedex/interfaces/pokeapi";
+import React from "react";
 
-export const getPokemon = (pokemonID: number, setPokemon: any) =>
+export const getPokemon = (pokemonID: number, setPokemon: React.Dispatch<React.SetStateAction<PokemonEntity>>) =>
     fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonID}`)
         .then(function (response) {
             return response.json();
