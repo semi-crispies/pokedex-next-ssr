@@ -4,10 +4,14 @@ import Image from 'next/image'
 import Type from "@/app/pokedex/components/Type";
 import {PokemonEntityData} from "@/app/pokedex/interfaces/pokeapi";
 import React from "react";
+import Toggle from "@/components/Toggle";
 
 export default function Pokemon(pokemon: PokemonEntityData) {
     return (
         <article className="flex flex-col items-center w-72">
+
+            <Toggle classList="flex self-end"/>
+
             <figure className="h-64 mb-14">
                 <Image src={pokemon.pokemonData.sprites} width={0} height={0} priority
                        alt={`Picture of ${pokemon.pokemonData.name}`} style={{width: 'auto', height: '300px'}}/>
