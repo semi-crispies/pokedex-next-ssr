@@ -3,9 +3,9 @@
 import Button from "@/components/Button";
 import Pokemon from "@/app/pokedex/components/Pokemon";
 import {useEffect, useState} from "react";
-import {NextNumber, PreviousNumber} from "@/services/utils";
-import {PokeapiPkmn, PokemonEntity} from "@/app/pokedex/interfaces/pokeapi";
+import {PokemonEntity} from "@/app/pokedex/interfaces/pokeapi";
 import {getPokemon} from "@/app/pokedex/providers/fetch";
+import {nextNumber, previousNumber} from "@/services/utils";
 
 export default function Home() {
 
@@ -27,9 +27,9 @@ export default function Home() {
 
             <div className="flex space-x-24">
                 <Button label={"Previous"} classList="bg-gray-300 hover:bg-gray-600 hover:text-white"
-                        onClick={() => PreviousNumber(pokemonID, setPokemonID)}/>
+                        onClick={() => previousNumber(pokemonID, setPokemonID, 1)}/>
                 <Button label={"Next"} classList="bg-gray-300 hover:bg-gray-600 hover:text-white"
-                        onClick={() => NextNumber(pokemonID, setPokemonID)}/>
+                        onClick={() => nextNumber(pokemonID, setPokemonID, 160)}/>
             </div>
 
         </main>
