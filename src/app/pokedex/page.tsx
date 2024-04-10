@@ -19,7 +19,7 @@ export default function Home() {
     }, [pokemonID]);
 
     return (
-        <main className="flex flex-col items-center justify-center py-8">
+        <main className="flex flex-col items-center justify-center">
 
             {pokemon.id !== 0 ? <Pokemon pokemonData={pokemon}/> : null}
 
