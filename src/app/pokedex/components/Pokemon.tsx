@@ -3,8 +3,8 @@
 import Image from 'next/image'
 import React from "react";
 import {capitalizeFirstLetter} from "@/services/utils";
-import Type from "@/components/Type";
-import {PokeapiPkmnData, PokeapiTypes} from "@/interfaces/pokeapi";
+import Type from "@/app/pokedex/components/Type";
+import {PokeapiPkmnData, PokeapiTypes} from "@/app/pokedex/interfaces/pokeapi";
 
 export default function Pokemon(pokemon: PokeapiPkmnData) {
     return (
