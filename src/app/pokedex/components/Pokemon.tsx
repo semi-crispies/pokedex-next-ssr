@@ -1,10 +1,9 @@
 'use client';
 
 import Image from 'next/image'
-import React from "react";
-import {capitalizeFirstLetter} from "@/services/utils";
 import Type from "@/app/pokedex/components/Type";
 import {PokemonEntityData} from "@/app/pokedex/interfaces/pokeapi";
+import React from "react";
 
 export default function Pokemon(pokemon: PokemonEntityData) {
     return (
@@ -14,8 +13,8 @@ export default function Pokemon(pokemon: PokemonEntityData) {
                        alt={`Picture of ${pokemon.pokemonData.name}`}/>
             </figure>
 
-            <h1 className="w-full">
-                #{pokemon.pokemonData.id.toString().padStart(3, '0')} - {capitalizeFirstLetter((pokemon.pokemonData.name))}
+            <h1 className="w-full capitalize">
+                #{pokemon.pokemonData.id.toString().padStart(3, '0')} - {pokemon.pokemonData.name}
             </h1>
 
             <div className="w-full flex flex-row-reverse gap-2">
@@ -26,7 +25,7 @@ export default function Pokemon(pokemon: PokemonEntityData) {
             <ul className="flex py-4 gap-4">
                 {pokemon.pokemonData.types.map((type: string, index: React.Key) => {
                     return <li key={index}>
-                        <Type text={capitalizeFirstLetter(type)} classList={`w-24 ${type}`}/>
+                        <Type text={type} classList={`w-24 capitalize ${type}`}/>
                     </li>
                 })}
             </ul>
