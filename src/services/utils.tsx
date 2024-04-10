@@ -1,4 +1,6 @@
 import React from "react";
+import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
+import { IoSparkles } from "react-icons/io5";
 
 /**
  * Function to decrement number with a minimum value
@@ -31,4 +33,15 @@ export function nextNumber(number: number, setNumber: React.Dispatch<React.SetSt
         setNumber(number + 1);
     }
 
+}
+
+export function getIconFromName (iconName: string) {
+    switch (iconName) {
+        case 'left':
+            return (<IoMdArrowDropleft className="flex-shrink-0" size="medium"/>);
+        case 'right':
+            return (<IoMdArrowDropright className="flex-shrink-0" size="medium"/>);
+        case 'sparkles':
+            return (<IoSparkles className="flex-shrink-0"/>);
+    }
 }
