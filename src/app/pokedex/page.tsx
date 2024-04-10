@@ -1,11 +1,11 @@
 'use client';
 
-import Image from "next/image";
 import Button from "@/components/Button";
 import Pokemon from "@/app/pokedex/components/Pokemon";
 import {useEffect, useState} from "react";
 import {NextNumber, PreviousNumber} from "@/services/utils";
 import {PokeapiPkmn} from "@/app/pokedex/interfaces/pokeapi";
+import {getPokemon} from "@/app/pokedex/providers/fetch";
 
 export default function Home() {
 
@@ -19,17 +19,8 @@ export default function Home() {
         weight: 0
     });
 
-    const getPokemon = (pokemonID: number) =>
-        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonID}`)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (json) {
-                setPokemon(json);
-            });
-
     useEffect(() => {
-        getPokemon(pokemonID).then(r => r);
+        getPokemon(pokemonID, setPokemon).then(r => r);
     }, [pokemonID]);
 
     return (
