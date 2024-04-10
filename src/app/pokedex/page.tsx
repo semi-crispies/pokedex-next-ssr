@@ -26,10 +26,10 @@ export default function Home() {
             <div>Pokemon ID : {pokemonID}</div>
 
             <div className="flex space-x-24">
-                <Button label={"Previous"} classList="bg-gray-300 hover:bg-gray-600 hover:text-white"
-                        onClick={() => previousNumber(pokemonID, setPokemonID, 1)}/>
-                <Button label={"Next"} classList="bg-gray-300 hover:bg-gray-600 hover:text-white"
-                        onClick={() => nextNumber(pokemonID, setPokemonID, 160)}/>
+                <Button label="" classList="bg-gray-300 hover:bg-gray-600 hover:text-white"
+                        onClick={() => previousNumber(pokemonID, setPokemonID, 1)} iconName="left"/>
+                <Button label="" classList="bg-gray-300 hover:bg-gray-600 hover:text-white"
+                        onClick={() => nextNumber(pokemonID, setPokemonID, 160)} iconName="right"/>
             </div>
 
         </main>
