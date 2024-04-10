@@ -38,10 +38,10 @@ export function nextNumber(number: number, setNumber: React.Dispatch<React.SetSt
 export function getIconFromName (iconName: string) {
     switch (iconName) {
         case 'left':
-            return (<IoMdArrowDropleft className="flex-shrink-0" size="medium"/>);
+            return (<IoMdArrowDropleft size="25"/>);
         case 'right':
-            return (<IoMdArrowDropright className="flex-shrink-0" size="medium"/>);
+            return (<IoMdArrowDropright size="25"/>);
         case 'sparkles':
-            return (<IoSparkles className="flex-shrink-0"/>);
+            return (<IoSparkles size="20"/>);
     }
 }
