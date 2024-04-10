@@ -2,10 +2,12 @@ import Link from 'next/link'
 
 export default function Navigation() {
     return (
-        <nav className="flex flex-col px-24">
-            <Link href="/">Home</Link>
+        <nav className="px-24">
+            <ul>
+                <li><Link href="/" className="flex-grow-0">Home</Link></li>
 
-            <Link href="/pokedex">Pokedex</Link>
+                <li><Link href="/pokedex">Pokedex</Link></li>
+            </ul>
         </nav>
     )
 }
