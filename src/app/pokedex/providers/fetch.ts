@@ -1,4 +1,4 @@
-import {PokeapiPkmn, PokeapiTypes, PokemonEntity} from "@/app/pokedex/interfaces/pokeapi";
+import { PokeapiPkmn, PokeapiTypes, PokemonEntity } from "@/app/pokedex/interfaces/pokeapi";
 import React from "react";
 
 export const getPokemon = (pokemonID: number, setPokemon: React.Dispatch<React.SetStateAction<PokemonEntity>>) =>
@@ -17,6 +17,16 @@ export const getPokemon = (pokemonID: number, setPokemon: React.Dispatch<React.S
             }
             setPokemon(cleanData);
         });
+
+export const getPokemonBySearch = (input: string) => {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${input}`)
+        .then((response) => {
+            if (response.status === 404) {
+                throw new Error(`Pokemon not found: ${input}`)
+            }
+            return response.json();
+        });
+}
 
 function formatTypes(rawTypes: PokeapiTypes[]): string[] {
     const cleanTypes: string[] = [];

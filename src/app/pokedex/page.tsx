@@ -2,17 +2,21 @@
 
 import Button from "@/components/Button";
 import Pokemon from "@/app/pokedex/components/Pokemon";
-import {useEffect, useState} from "react";
-import {PokemonEntity} from "@/app/pokedex/interfaces/pokeapi";
-import {getPokemon} from "@/app/pokedex/providers/fetch";
-import {nextNumber, previousNumber} from "@/services/utils";
+import { useCallback, useEffect, useState, KeyboardEvent } from "react";
+import { PokemonEntity } from "@/app/pokedex/interfaces/pokeapi";
+import { getPokemon, getPokemonBySearch } from "@/app/pokedex/providers/fetch";
+import { nextNumber, previousNumber } from "@/services/utils";
 
 export default function Home() {
-
     const [pokemonID, setPokemonID] = useState<number>(1);
     const [pokemon, setPokemon] = useState<PokemonEntity>({
         height: 0, id: 0, name: "", sprites: "", types: [], weight: 0
     });
+    const [searchInput, setSearchInput] = useState<string>('Mew');
+
+    const onChange = useCallback((input: any) => {
+        setSearchInput(input.target.value)
+    }, [searchInput])
 
     useEffect(() => {
         getPokemon(pokemonID, setPokemon).then(r => r);
@@ -31,7 +35,19 @@ export default function Home() {
                 <Button label="" classList="bg-gray-300 hover:bg-gray-600 hover:text-white"
                         onClick={() => nextNumber(pokemonID, setPokemonID, 160)} iconName="right"/>
             </div>
-
+            <div>
+                <input
+                    placeholder='Mew'
+                    type='text'
+                    onChange={onChange}
+                    onKeyDown={(event) => {
+                        if (event.key === 'Enter') {
+                            // handle error
+                            getPokemonBySearch(searchInput)
+                        }
+                    }}
+                ></input>
+            </div>
         </main>
     )
 }
