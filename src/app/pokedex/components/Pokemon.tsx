@@ -13,7 +13,7 @@ export default function Pokemon(pokemon: PokemonEntityData) {
             <Toggle classList="self-end mb-4" iconName="sparkles" label=""/>
 
             <figure className="h-64 mb-14">
-                <Image src={pokemon.pokemonData.sprites} width={0} height={0} priority
+                <Image src={pokemon.pokemonData.sprites.default} width={500} height={0} priority
                        alt={`Picture of ${pokemon.pokemonData.name}`} style={{width: 'auto', height: '300px'}}/>
             </figure>
 

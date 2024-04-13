@@ -13,13 +13,10 @@ export type PokeapiPkmn = {
     height: number,
     types: PokeapiTypes[],
     sprites: {
-        front_default: string,
         other: {
-            dream_world: {
-                front_default: string
-            },
-            home: {
-                front_shiny: string
+            'official-artwork': {
+                front_default: string,
+                front_shiny: string,
             }
         },
     }
@@ -31,7 +28,10 @@ export type PokemonEntity = {
     weight: number,
     height: number,
     types: string[],
-    sprites: string,
+    sprites: {
+        default: string,
+        shiny: string,
+    },
 }
 
 export type PokemonEntityData = {
