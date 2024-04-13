@@ -1,11 +1,14 @@
-import { PokeapiPkmn, PokeapiTypes, PokemonEntity } from "@/app/pokedex/interfaces/pokeapi";
+import type { PokeapiPkmn, PokeapiTypes, PokemonEntity } from "@/app/pokedex/interfaces/pokeapi";
 import React from "react";
 
 export const getPokemon = async (pokemonID: number, setPokemon: React.Dispatch<React.SetStateAction<PokemonEntity>>) => {
 
-    const fetchPokemon = new Promise((resolve, reject) => {
-        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonID}`)
-            .then(function (response) {
+    const fetchPokemon = fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonID}`)
+            .then((response) => {
+                switch (response.status) {
+                    case 404:
+                        throw new Error("404");
+                }
                 return response.json();
             })
             .then(function (json: PokeapiPkmn) {
@@ -20,25 +23,17 @@ export const getPokemon = async (pokemonID: number, setPokemon: React.Dispatch<R
                         shiny: json.sprites.other["official-artwork"].front_shiny,
                     },
                 }
-                resolve(cleanData);
-                //return cleanData;
+                 return cleanData;
                 //setPokemon(cleanData);
             })
             .catch((error) => {
-                reject('CUSTOooooooooM ' + error);
+                console.log('Catch ' + error);
             });
-    });
 
-    //await fetchPokemon === 'success' ? setPokemon(fetchPokemon) : 'null';
-    // console.log('coucou')
-    // console.log(await fetchPokemon);
-    // console.log('coucou')
+    const pokemonData = await fetchPokemon;
 
-    //fetchPokemon() === 'success' ? setPokemon(fetchPokemon()) : 'null';
-
-    if (await fetchPokemon) {
-        // @ts-ignore
-        setPokemon(await fetchPokemon);
+    if (pokemonData) {
+        setPokemon(pokemonData);
     }
 
 }
