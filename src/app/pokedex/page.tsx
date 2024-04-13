@@ -2,20 +2,20 @@
 
 import Button from "@/components/Button";
 import Pokemon from "@/app/pokedex/components/Pokemon";
-import { useCallback, useEffect, useState, KeyboardEvent } from "react";
-import { PokemonEntity } from "@/app/pokedex/interfaces/pokeapi";
-import { getPokemon, getPokemonBySearch } from "@/app/pokedex/providers/fetch";
-import { nextNumber, previousNumber } from "@/services/utils";
+import {useCallback, useEffect, useState, KeyboardEvent} from "react";
+import {PokemonEntity} from "@/app/pokedex/interfaces/pokeapi";
+import {getPokemon, getPokemonBySearch} from "@/app/pokedex/providers/fetch";
+import {nextNumber, previousNumber} from "@/services/utils";
 
 export default function Home() {
     const [pokemonID, setPokemonID] = useState<number>(1);
     const [pokemon, setPokemon] = useState<PokemonEntity>({
-        height: 0,
-        id: 0,
-        name: "",
-        sprites: {default: "", shiny: ""},
-        types: [],
-        weight: 0
+        evolution: {
+            base: "",
+            evo1: "",
+            evo2: ""
+        }, height: 0, id: 0, name: "", sprites: {default: "", shiny: ""}, types: [], weight: 0
+
     });
     const [searchInput, setSearchInput] = useState<string>('Mew');
 
@@ -41,17 +41,13 @@ export default function Home() {
                         onClick={() => nextNumber(pokemonID, setPokemonID, 160)} iconName="right"/>
             </div>
             <div>
-                <input
-                    placeholder='Mew'
-                    type='text'
-                    onChange={onChange}
-                    onKeyDown={(event) => {
-                        if (event.key === 'Enter') {
-                            // handle error
-                            getPokemonBySearch(searchInput)
-                        }
-                    }}
-                ></input>
+                <input placeholder='Mew' type='text' onChange={onChange}
+                       onKeyDown={(event) => {
+                           if (event.key === 'Enter') {
+                               // handle error
+                               getPokemonBySearch(searchInput)
+                           }
+                       }}/>
             </div>
         </main>
     )

@@ -2,14 +2,14 @@
 
 import Image from 'next/image'
 import Type from "@/app/pokedex/components/Type";
-import {PokemonEntityData} from "@/app/pokedex/interfaces/pokeapi";
+import type {PokemonEntityData} from "@/app/pokedex/interfaces/pokeapi";
 import React, {useState} from "react";
 import Toggle from "@/components/Toggle";
 import {skinHandler} from "@/services/utils";
 
 export default function Pokemon(pokemon: PokemonEntityData) {
 
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState<boolean>(false);
 
     return (
         <article className="flex flex-col items-center w-72">
@@ -38,6 +38,13 @@ export default function Pokemon(pokemon: PokemonEntityData) {
                     </li>
                 })}
             </ul>
+
+            <ul>
+                {Object.entries(pokemon.pokemonData.evolution).map((phase: any, index: React.Key) => {
+                    return <li className="capitalize" key={index}>{phase[1]}</li>
+                })}
+            </ul>
+
         </article>
     )
 }

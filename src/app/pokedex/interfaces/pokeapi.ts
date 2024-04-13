@@ -32,8 +32,15 @@ export type PokemonEntity = {
         default: string,
         shiny: string,
     },
+    evolution: PokemonEvolution
 }
 
 export type PokemonEntityData = {
     pokemonData: PokemonEntity
+}
+
+export type PokemonEvolution = {
+    base: string,
+    evo1: string,
+    evo2: string,
 }
