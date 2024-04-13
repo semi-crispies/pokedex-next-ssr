@@ -1,6 +1,7 @@
 import React from "react";
 import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { IoSparkles } from "react-icons/io5";
+import {PokemonEntityData} from "@/app/pokedex/interfaces/pokeapi";
 
 /**
  * Function to decrement number with a minimum value
@@ -44,4 +45,17 @@ export function getIconFromName (iconName: string) {
         case 'sparkles':
             return (<IoSparkles size="20"/>);
     }
+}
+
+/**
+ *
+ * @param checkboxStatus
+ * @param pokemon
+ */
+export function skinHandler(checkboxStatus: boolean, pokemon: PokemonEntityData): string {
+    let skin = pokemon.pokemonData.sprites.default;
+    if (checkboxStatus) {
+        skin = pokemon.pokemonData.sprites.shiny;
+    }
+    return skin;
 }

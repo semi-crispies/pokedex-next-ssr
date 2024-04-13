@@ -3,17 +3,22 @@
 import Image from 'next/image'
 import Type from "@/app/pokedex/components/Type";
 import {PokemonEntityData} from "@/app/pokedex/interfaces/pokeapi";
-import React from "react";
+import React, {useState} from "react";
 import Toggle from "@/components/Toggle";
+import {skinHandler} from "@/services/utils";
 
 export default function Pokemon(pokemon: PokemonEntityData) {
+
+    const [checked, setChecked] = useState(false);
+
     return (
         <article className="flex flex-col items-center w-72">
 
-            <Toggle classList="self-end mb-4" iconName="sparkles" label=""/>
+            <Toggle classList="self-end mb-4" iconName="sparkles" onClick={() => setChecked(!checked)}
+                    checked={checked}/>
 
             <figure className="h-64 mb-14">
-                <Image src={pokemon.pokemonData.sprites.default} width={500} height={0} priority
+                <Image src={skinHandler(checked, pokemon)} width={500} height={0} priority
                        alt={`Picture of ${pokemon.pokemonData.name}`} style={{width: 'auto', height: '300px'}}/>
             </figure>
 
