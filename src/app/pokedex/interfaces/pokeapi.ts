@@ -17,6 +17,9 @@ export type PokeapiPkmn = {
             'official-artwork': {
                 front_default: string,
                 front_shiny: string,
+            },
+            showdown: {
+                front_default: string,
             }
         },
     }
@@ -40,7 +43,11 @@ export type PokemonEntityData = {
 }
 
 export type PokemonEvolution = {
-    base: string,
-    evo1: string,
+    base: PokemonEvolutionItem,
+    evo1: PokemonEvolutionItem[],
     evo2: string,
+}
+
+export type PokemonEvolutionItem = {
+    id: number, name: string, sprite: string
 }

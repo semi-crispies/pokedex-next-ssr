@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Type from "@/app/pokedex/components/Type";
-import type {PokemonEntityData} from "@/app/pokedex/interfaces/pokeapi";
+import type {PokemonEntityData, PokemonEvolutionItem} from "@/app/pokedex/interfaces/pokeapi";
 import React, {useState} from "react";
 import Toggle from "@/components/Toggle";
 import {skinHandler} from "@/services/utils";
@@ -10,6 +10,7 @@ import {skinHandler} from "@/services/utils";
 export default function Pokemon(pokemon: PokemonEntityData) {
 
     const [checked, setChecked] = useState<boolean>(false);
+    console.log(pokemon.pokemonData.evolution.evo1);
 
     return (
         <article className="flex flex-col items-center w-72">
@@ -39,11 +40,29 @@ export default function Pokemon(pokemon: PokemonEntityData) {
                 })}
             </ul>
 
-            <ul>
-                {Object.entries(pokemon.pokemonData.evolution).map((phase: any, index: React.Key) => {
-                    return <li className="capitalize" key={index}>{phase[1]}</li>
+            <div className="flex">
+                <span>#{pokemon.pokemonData.evolution.base.id.toString().padStart(3, '0')}</span>
+
+                <Image src={pokemon.pokemonData.evolution.base.sprite}
+                       alt={`Picture of ${pokemon.pokemonData.evolution.base.name}`}
+                       width={50} height={0} style={{width: 'auto', height: '30px'}}/>
+
+                <div className="capitalize">{pokemon.pokemonData.evolution.base.name}</div>
+            </div>
+
+            <div>
+                {(pokemon.pokemonData.evolution.evo1).map((evo: PokemonEvolutionItem, index: React.Key) => {
+                    return <div key={index} className="flex">
+                        <span>#{evo.id.toString().padStart(3, '0')}</span>
+
+                        <Image src={evo.sprite}
+                               alt={`Picture of ${evo.name}`}
+                               width={50} height={0} style={{width: 'auto', height: '30px'}}/>
+
+                        <div className="capitalize">{evo.name}</div>
+                    </div>
                 })}
-            </ul>
+            </div>
 
         </article>
     )

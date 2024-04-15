@@ -11,8 +11,12 @@ export default function Home() {
     const [pokemonID, setPokemonID] = useState<number>(1);
     const [pokemon, setPokemon] = useState<PokemonEntity>({
         evolution: {
-            base: "",
-            evo1: "",
+            base: {
+                id: 0,
+                name: "",
+                sprite: ""
+            },
+            evo1: [],
             evo2: ""
         }, height: 0, id: 0, name: "", sprites: {default: "", shiny: ""}, types: [], weight: 0
 

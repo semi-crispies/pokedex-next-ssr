@@ -1,4 +1,10 @@
-import type {PokeapiPkmn, PokeapiTypes, PokemonEntity, PokemonEvolution} from "@/app/pokedex/interfaces/pokeapi";
+import type {
+    PokeapiPkmn,
+    PokeapiTypes,
+    PokemonEntity,
+    PokemonEvolution,
+    PokemonEvolutionItem
+} from "@/app/pokedex/interfaces/pokeapi";
 import React from "react";
 
 export const getPokemon = async (pokemonID: number, setPokemon: React.Dispatch<React.SetStateAction<PokemonEntity>>) => {
@@ -23,8 +29,8 @@ export const getPokemon = async (pokemonID: number, setPokemon: React.Dispatch<R
                     shiny: json.sprites.other["official-artwork"].front_shiny,
                 },
                 evolution: {
-                    base: "",
-                    evo1: "",
+                    base: {id: 0, name: "", sprite: ""},
+                    evo1: [],
                     evo2: ""
                 }
             }
@@ -60,12 +66,66 @@ export const getPokemon = async (pokemonID: number, setPokemon: React.Dispatch<R
             return response.json();
         })
         .then((json) => {
-            const evo: PokemonEvolution = {
-                base: json.chain.species.name,
-                evo1: json.chain.evolves_to[0]?.species.name,
+
+            // BASE
+            const pokemonName = json.chain.species.name;
+            const base: PokemonEvolutionItem = {
+                id: 0,
+                name: pokemonName,
+                sprite: ""
+            }
+            fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+                .then((response) => {
+                    switch (response.status) {
+                        case 404:
+                            throw new Error("404");
+                    }
+                    return response.json();
+                })
+                .then((json: PokeapiPkmn) => {
+                    base.id = json.id;
+                    base.sprite = json.sprites.other.showdown.front_default;
+                })
+                .catch((error) => {
+                    console.log(`Catch fetchPokemon : ${error}`);
+                });
+
+            // EVO1
+            const evo1: PokemonEvolutionItem[] = [];
+            for (const evo1ApiItem of json.chain.evolves_to) {
+                const evo1Name = evo1ApiItem.species.name;
+                const evo1data: PokemonEvolutionItem = {
+                    id: 0,
+                    name: evo1Name,
+                    sprite: ""
+                }
+                fetch(`https://pokeapi.co/api/v2/pokemon/${evo1Name}`)
+                    .then((response) => {
+                        switch (response.status) {
+                            case 404:
+                                throw new Error("404");
+                        }
+                        return response.json();
+                    })
+                    .then((json: PokeapiPkmn) => {
+                        evo1data.id = json.id;
+                        evo1data.sprite = json.sprites.other.showdown.front_default;
+                    })
+                    .catch((error) => {
+                        console.log(`Catch fetchPokemon : ${error}`);
+                    });
+
+                evo1.push(evo1data)
+            }
+
+            // EVO2
+
+            return {
+                base: base,
+                evo1: evo1,
                 evo2: json.chain.evolves_to[0]?.evolves_to[0]?.species.name,
             };
-            return evo;
+
         })
         .catch((error) => {
             console.log(`Catch fetchEvolution : ${error}`);
