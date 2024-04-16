@@ -1,3 +1,5 @@
+import React from "react";
+
 export type PokeapiTypes = {
     slot: number
     type: {
@@ -53,5 +55,6 @@ export type PokemonEvolutionItem = {
 }
 
 export type PokemonEvolutionItemParams = {
-    pokemonEvolutionData: PokemonEvolutionItem
+    pokemonEvolutionData: PokemonEvolutionItem,
+    key?: React.Key,
 }

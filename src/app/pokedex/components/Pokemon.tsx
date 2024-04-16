@@ -6,14 +6,15 @@ import type {PokemonEntityData, PokemonEvolutionItem} from "@/app/pokedex/interf
 import React, {useState} from "react";
 import Toggle from "@/components/Toggle";
 import {skinHandler} from "@/services/utils";
+import PokemonTeaser from "@/app/pokedex/components/PokemonTeaser";
 
 export default function Pokemon(pokemon: PokemonEntityData) {
 
     const [checked, setChecked] = useState<boolean>(false);
-    console.log(pokemon.pokemonData.evolution.evo1);
+    //console.log(pokemon.pokemonData.evolution.evo1);
 
     return (
-        <article className="flex flex-col items-center w-72">
+        <article className="flex flex-col items-center w-96">
 
             <Toggle classList="self-end mb-4" iconName="sparkles" onClick={() => setChecked(!checked)}
                     checked={checked}/>
@@ -40,28 +41,20 @@ export default function Pokemon(pokemon: PokemonEntityData) {
                 })}
             </ul>
 
-            <div className="flex">
-                <span>#{pokemon.pokemonData.evolution.base.id.toString().padStart(3, '0')}</span>
-
-                <Image src={pokemon.pokemonData.evolution.base.sprite}
-                       alt={`Picture of ${pokemon.pokemonData.evolution.base.name}`}
-                       width={50} height={0} style={{width: 'auto', height: '30px'}}/>
-
-                <div className="capitalize">{pokemon.pokemonData.evolution.base.name}</div>
-            </div>
-
             <div>
-                {(pokemon.pokemonData.evolution.evo1).map((evo: PokemonEvolutionItem, index: React.Key) => {
-                    return <div key={index} className="flex">
-                        <span>#{evo.id.toString().padStart(3, '0')}</span>
 
-                        <Image src={evo.sprite}
-                               alt={`Picture of ${evo.name}`}
-                               width={50} height={0} style={{width: 'auto', height: '30px'}}/>
+                <div className="base">
+                    <PokemonTeaser pokemonEvolutionData={pokemon.pokemonData.evolution.base}/>
+                </div>
 
-                        <div className="capitalize">{evo.name}</div>
-                    </div>
-                })}
+                <div className="evo1 flex flex-row gap-4 justify-center">
+                    {(pokemon.pokemonData.evolution.evo1).map((evo: PokemonEvolutionItem, index: React.Key) => {
+                        return (
+                            <PokemonTeaser key={index} pokemonEvolutionData={evo}/>
+                        )
+                    })}
+                </div>
+
             </div>
 
         </article>
