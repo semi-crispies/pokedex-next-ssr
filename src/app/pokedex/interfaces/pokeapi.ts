@@ -51,3 +51,7 @@ export type PokemonEvolution = {
 export type PokemonEvolutionItem = {
     id: number, name: string, sprite: string
 }
+
+export type PokemonEvolutionItemParams = {
+    pokemonEvolutionData: PokemonEvolutionItem
+}
