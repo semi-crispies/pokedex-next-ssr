@@ -5,6 +5,7 @@ import type {
     PokemonEvolution,
 } from "@/app/pokedex/interfaces/pokeapi";
 import React from "react";
+import nested from "postcss-nested";
 
 export const getPokemon = async (pokemonID: number, setPokemon: React.Dispatch<React.SetStateAction<PokemonEntity>>) => {
 
@@ -130,6 +131,7 @@ async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolut
                     sprite: "",
                     evolveTo: [],
                 }
+
                 fetch(`https://pokeapi.co/api/v2/pokemon/${evoData.name}`)
                     .then((response) => {
                         switch (response.status) {
@@ -141,12 +143,41 @@ async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolut
                     .then((json: PokeapiPkmn) => {
                         evoData.id = json.id;
                         evoData.sprite = json.sprites.other.showdown.front_default;
+
+                        for (const nestedApiEvo of evoApiItem.evolves_to) {
+                            const nestedEvo: PokemonEvolution = {
+                                id: 0,
+                                name: "",
+                                sprite: "",
+                                evolveTo: [],
+                            }
+
+                            nestedEvo.name = nestedApiEvo.species.name;
+
+                            fetch(`https://pokeapi.co/api/v2/pokemon/${nestedEvo.name}`)
+                                .then((response) => {
+                                    switch (response.status) {
+                                        case 404:
+                                            throw new Error("404");
+                                    }
+                                    return response.json();
+                                })
+                                .then((json: PokeapiPkmn) => {
+                                    nestedEvo.id = json.id;
+                                    nestedEvo.sprite = json.sprites.other.showdown.front_default;
+                                })
+                                .catch((error) => {
+                                    console.log(`Catch fetchPokemon : ${error}`);
+                                });
+                            evoData.evolveTo.push(nestedEvo);
+                        }
+
                     })
                     .catch((error) => {
                         console.log(`Catch fetchPokemon : ${error}`);
                     });
 
-                evolutionChain.evolveTo.push(evoData)
+                evolutionChain.evolveTo.push(evoData);
             }
 
         })
