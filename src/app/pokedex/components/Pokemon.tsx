@@ -49,11 +49,18 @@ export default function Pokemon(pokemon: PokemonEntityData) {
                 </div>
 
                 <div className="evo flex flex-row gap-4 justify-center">
-                    {(pokemon.pokemonData.evolution.evolveTo).map((evo: PokemonEvolution, index: React.Key) => {
-                        return (
+                    {pokemon.pokemonData.evolution.evolveTo.map((evo: PokemonEvolution, index: React.Key) => (
+                        <div key={index}>
                             <PokemonTeaser key={index} pokemonEvolutionData={evo}/>
-                        )
-                    })}
+                            <div className="flex flex-row">
+                                {evo.evolveTo.map((innerEvo: PokemonEvolution, innerIndex: React.Key) => (
+                                    <div key={innerIndex}>
+                                        <PokemonTeaser key={innerIndex} pokemonEvolutionData={innerEvo}/>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
             </div>
