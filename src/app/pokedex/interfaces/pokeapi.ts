@@ -46,8 +46,7 @@ export type PokemonEntityData = {
 
 export type PokemonEvolution = {
     base: PokemonEvolutionItem,
-    evo1: PokemonEvolutionItem[],
-    evo2: string,
+    evo: PokemonEvolutionItem[],
 }
 
 export type PokemonEvolutionItem = {

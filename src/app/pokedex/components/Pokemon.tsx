@@ -11,7 +11,6 @@ import PokemonTeaser from "@/app/pokedex/components/PokemonTeaser";
 export default function Pokemon(pokemon: PokemonEntityData) {
 
     const [checked, setChecked] = useState<boolean>(false);
-    //console.log(pokemon.pokemonData.evolution.evo1);
 
     return (
         <article className="flex flex-col items-center w-96">
@@ -48,7 +47,7 @@ export default function Pokemon(pokemon: PokemonEntityData) {
                 </div>
 
                 <div className="evo1 flex flex-row gap-4 justify-center">
-                    {(pokemon.pokemonData.evolution.evo1).map((evo: PokemonEvolutionItem, index: React.Key) => {
+                    {(pokemon.pokemonData.evolution.evo).map((evo: PokemonEvolutionItem, index: React.Key) => {
                         return (
                             <PokemonTeaser key={index} pokemonEvolutionData={evo}/>
                         )

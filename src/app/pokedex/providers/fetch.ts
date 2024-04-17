@@ -30,8 +30,7 @@ export const getPokemon = async (pokemonID: number, setPokemon: React.Dispatch<R
                 },
                 evolution: {
                     base: {id: 0, name: "", sprite: ""},
-                    evo1: [],
-                    evo2: ""
+                    evo: [],
                 }
             }
             return cleanData;
@@ -76,9 +75,8 @@ async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolut
             name: "",
             sprite: ""
         },
-        evo1: [],
-        evo2: ""
-    }
+        evo: [],
+       }
 
     const fetchSpecies = fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonID}`)
         .then((response) => {
@@ -125,16 +123,14 @@ async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolut
                     console.log(`Catch fetchPokemon : ${error}`);
                 });
 
-            // EVO1
-            //const evo1: PokemonEvolutionItem[] = [];
-            for (const evo1ApiItem of json.chain.evolves_to) {
-                const evo1Name = evo1ApiItem.species.name;
-                const evo1data: PokemonEvolutionItem = {
+            // EVO
+            for (const evoApiItem of json.chain.evolves_to) {
+                const evoData: PokemonEvolutionItem = {
                     id: 0,
-                    name: evo1ApiItem.species.name,
+                    name: evoApiItem.species.name,
                     sprite: ""
                 }
-                fetch(`https://pokeapi.co/api/v2/pokemon/${evo1data.name}`)
+                fetch(`https://pokeapi.co/api/v2/pokemon/${evoData.name}`)
                     .then((response) => {
                         switch (response.status) {
                             case 404:
@@ -143,24 +139,15 @@ async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolut
                         return response.json();
                     })
                     .then((json: PokeapiPkmn) => {
-                        evo1data.id = json.id;
-                        evo1data.sprite = json.sprites.other.showdown.front_default;
+                        evoData.id = json.id;
+                        evoData.sprite = json.sprites.other.showdown.front_default;
                     })
                     .catch((error) => {
                         console.log(`Catch fetchPokemon : ${error}`);
                     });
 
-                evolution.evo1.push(evo1data)
+                evolution.evo.push(evoData)
             }
-
-            // EVO2
-            //TODO
-
-            // return {
-            //     base: base,
-            //     evo1: evo1,
-            //     evo2: json.chain.evolves_to[0]?.evolves_to[0]?.species.name,
-            // };
 
         })
         .catch((error) => {
