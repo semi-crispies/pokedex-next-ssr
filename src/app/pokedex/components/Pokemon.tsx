@@ -40,24 +40,32 @@ export default function Pokemon(pokemon: PokemonEntityData) {
                 })}
             </ul>
 
-            <div>
+            <div className="evolution-tree">
 
                 <PokemonTeaser pokemonEvolutionData={pokemon.pokemonData.evolution}/>
 
-                <div className="flex flex-row gap-4 justify-center">
-                    {pokemon.pokemonData.evolution.evolveTo.map((evo: PokemonEvolution, index: React.Key) => (
-                        <div key={index}>
-                            <PokemonTeaser pokemonEvolutionData={evo}/>
-                            <div className="flex flex-row gap-4 justify-center">
-                                {evo.evolveTo.map((innerEvo: PokemonEvolution, innerIndex: React.Key) => (
-                                    <div key={innerIndex}>
-                                        <PokemonTeaser pokemonEvolutionData={innerEvo}/>
-                                    </div>
-                                ))}
+                {pokemon.pokemonData.evolution.evolveTo.length !== 0 ?
+
+                    <div className="flex flex-row gap-4 justify-center">
+
+                        {pokemon.pokemonData.evolution.evolveTo.map((evo: PokemonEvolution, index: React.Key) => (
+                            <div key={index} className={`${evo.name}`}>
+
+                                <PokemonTeaser pokemonEvolutionData={evo}/>
+
+                                {evo.evolveTo.length !== 0 ?
+                                    <div className="flex flex-row gap-4 justify-center">
+                                        {evo.evolveTo.map((innerEvo: PokemonEvolution, innerIndex: React.Key) => (
+                                            <div key={innerIndex} className={`${innerEvo.name}`}>
+                                                <PokemonTeaser pokemonEvolutionData={innerEvo}/>
+                                            </div>
+                                        ))}
+                                    </div> : <></>}
+
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+
+                    </div> : <></>}
 
             </div>
 
