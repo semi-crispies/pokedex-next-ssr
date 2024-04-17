@@ -12,8 +12,6 @@ export default function Pokemon(pokemon: PokemonEntityData) {
 
     const [checked, setChecked] = useState<boolean>(false);
 
-    //console.log(pokemon.pokemonData.evolution.evolveTo);
-
     return (
         <article className="flex flex-col items-center w-96">
 
@@ -44,18 +42,16 @@ export default function Pokemon(pokemon: PokemonEntityData) {
 
             <div>
 
-                <div className="base">
-                    <PokemonTeaser pokemonEvolutionData={pokemon.pokemonData.evolution}/>
-                </div>
+                <PokemonTeaser pokemonEvolutionData={pokemon.pokemonData.evolution}/>
 
-                <div className="evo flex flex-row gap-4 justify-center">
+                <div className="flex flex-row gap-4 justify-center">
                     {pokemon.pokemonData.evolution.evolveTo.map((evo: PokemonEvolution, index: React.Key) => (
                         <div key={index}>
-                            <PokemonTeaser key={index} pokemonEvolutionData={evo}/>
-                            <div className="flex flex-row">
+                            <PokemonTeaser pokemonEvolutionData={evo}/>
+                            <div className="flex flex-row gap-4 justify-center">
                                 {evo.evolveTo.map((innerEvo: PokemonEvolution, innerIndex: React.Key) => (
                                     <div key={innerIndex}>
-                                        <PokemonTeaser key={innerIndex} pokemonEvolutionData={innerEvo}/>
+                                        <PokemonTeaser pokemonEvolutionData={innerEvo}/>
                                     </div>
                                 ))}
                             </div>
