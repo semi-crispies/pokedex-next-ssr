@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Type from "@/app/pokedex/components/Type";
-import type {PokemonEntityData, PokemonEvolutionItem} from "@/app/pokedex/interfaces/pokeapi";
+import type {PokemonEntityData, PokemonEvolution} from "@/app/pokedex/interfaces/pokeapi";
 import React, {useState} from "react";
 import Toggle from "@/components/Toggle";
 import {skinHandler} from "@/services/utils";
@@ -11,6 +11,8 @@ import PokemonTeaser from "@/app/pokedex/components/PokemonTeaser";
 export default function Pokemon(pokemon: PokemonEntityData) {
 
     const [checked, setChecked] = useState<boolean>(false);
+
+    //console.log(pokemon.pokemonData.evolution.evolveTo);
 
     return (
         <article className="flex flex-col items-center w-96">
@@ -43,11 +45,11 @@ export default function Pokemon(pokemon: PokemonEntityData) {
             <div>
 
                 <div className="base">
-                    <PokemonTeaser pokemonEvolutionData={pokemon.pokemonData.evolution.base}/>
+                    <PokemonTeaser pokemonEvolutionData={pokemon.pokemonData.evolution}/>
                 </div>
 
-                <div className="evo1 flex flex-row gap-4 justify-center">
-                    {(pokemon.pokemonData.evolution.evo).map((evo: PokemonEvolutionItem, index: React.Key) => {
+                <div className="evo flex flex-row gap-4 justify-center">
+                    {(pokemon.pokemonData.evolution.evolveTo).map((evo: PokemonEvolution, index: React.Key) => {
                         return (
                             <PokemonTeaser key={index} pokemonEvolutionData={evo}/>
                         )
