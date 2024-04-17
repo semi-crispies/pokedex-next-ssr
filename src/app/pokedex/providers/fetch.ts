@@ -3,7 +3,6 @@ import type {
     PokeapiTypes,
     PokemonEntity,
     PokemonEvolution,
-    PokemonEvolutionItem
 } from "@/app/pokedex/interfaces/pokeapi";
 import React from "react";
 
@@ -29,8 +28,10 @@ export const getPokemon = async (pokemonID: number, setPokemon: React.Dispatch<R
                     shiny: json.sprites.other["official-artwork"].front_shiny,
                 },
                 evolution: {
-                    base: {id: 0, name: "", sprite: ""},
-                    evo: [],
+                    id: 0,
+                    name: "",
+                    sprite: "",
+                    evolveTo: [],
                 }
             }
             return cleanData;
@@ -69,14 +70,12 @@ function formatTypes(rawTypes: PokeapiTypes[]): string[] {
 
 async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolution> {
 
-    const evolution: PokemonEvolution = {
-        base: {
-            id: 0,
-            name: "",
-            sprite: ""
-        },
-        evo: [],
-       }
+    const evolutionChain: PokemonEvolution = {
+        id: 0,
+        name: "",
+        sprite: "",
+        evolveTo: [],
+    }
 
     const fetchSpecies = fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonID}`)
         .then((response) => {
@@ -105,7 +104,7 @@ async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolut
 
             // BASE
             const pokemonName = json.chain.species.name;
-            evolution.base.name = pokemonName;
+            evolutionChain.name = pokemonName;
 
             fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
                 .then((response) => {
@@ -116,8 +115,8 @@ async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolut
                     return response.json();
                 })
                 .then((json: PokeapiPkmn) => {
-                    evolution.base.id = json.id;
-                    evolution.base.sprite = json.sprites.other.showdown.front_default;
+                    evolutionChain.id = json.id;
+                    evolutionChain.sprite = json.sprites.other.showdown.front_default;
                 })
                 .catch((error) => {
                     console.log(`Catch fetchPokemon : ${error}`);
@@ -125,10 +124,11 @@ async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolut
 
             // EVO
             for (const evoApiItem of json.chain.evolves_to) {
-                const evoData: PokemonEvolutionItem = {
+                const evoData: PokemonEvolution = {
                     id: 0,
                     name: evoApiItem.species.name,
-                    sprite: ""
+                    sprite: "",
+                    evolveTo: [],
                 }
                 fetch(`https://pokeapi.co/api/v2/pokemon/${evoData.name}`)
                     .then((response) => {
@@ -146,7 +146,7 @@ async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolut
                         console.log(`Catch fetchPokemon : ${error}`);
                     });
 
-                evolution.evo.push(evoData)
+                evolutionChain.evolveTo.push(evoData)
             }
 
         })
@@ -154,5 +154,5 @@ async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolut
             console.log(`Catch fetchEvolution : ${error}`);
         })
 
-    return evolution;
+    return evolutionChain;
 }
