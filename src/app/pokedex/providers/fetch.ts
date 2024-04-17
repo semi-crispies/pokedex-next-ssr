@@ -164,7 +164,7 @@ async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolut
                                 })
                                 .then((json: PokeapiPkmn) => {
                                     nestedEvo.id = json.id;
-                                    nestedEvo.sprite = json.sprites.other.showdown.front_default;
+                                    nestedEvo.sprite = json.sprites.other.showdown.front_default ? json.sprites.other.showdown.front_default : json.sprites.other["official-artwork"].front_default;
                                 })
                                 .catch((error) => {
                                     console.log(`Catch fetchPokemon : ${error}`);
