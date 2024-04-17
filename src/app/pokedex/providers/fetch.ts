@@ -5,7 +5,6 @@ import type {
     PokemonEvolution,
 } from "@/app/pokedex/interfaces/pokeapi";
 import React from "react";
-import nested from "postcss-nested";
 
 export const getPokemon = async (pokemonID: number, setPokemon: React.Dispatch<React.SetStateAction<PokemonEntity>>) => {
 
