@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import type {PokemonEvolutionItemParams} from "@/app/pokedex/interfaces/pokeapi";
+import type {PokemonEvolutionParams} from "@/app/pokedex/interfaces/pokeapi";
 
-export default function PokemonTeaser(pokemonParams: PokemonEvolutionItemParams) {
+export default function PokemonTeaser(pokemonParams: PokemonEvolutionParams) {
 
     const pokemon = pokemonParams.pokemonEvolutionData;
 

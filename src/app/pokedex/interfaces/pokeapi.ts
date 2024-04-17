@@ -45,15 +45,10 @@ export type PokemonEntityData = {
 }
 
 export type PokemonEvolution = {
-    base: PokemonEvolutionItem,
-    evo: PokemonEvolutionItem[],
+    id: number, name: string, sprite: string, evolveTo: PokemonEvolution[]
 }
 
-export type PokemonEvolutionItem = {
-    id: number, name: string, sprite: string
-}
-
-export type PokemonEvolutionItemParams = {
-    pokemonEvolutionData: PokemonEvolutionItem,
+export type PokemonEvolutionParams = {
+    pokemonEvolutionData: PokemonEvolution,
     key?: React.Key,
 }
