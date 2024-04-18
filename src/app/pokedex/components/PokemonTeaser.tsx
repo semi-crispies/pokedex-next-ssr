@@ -14,7 +14,7 @@ export default function PokemonTeaser(pokemonParams: PokemonEvolutionParams) {
                         <span>#{pokemon.id.toString().padStart(3, '0')}</span>
 
                         <Image src={pokemon.sprite}
-                               alt={`Picture of ${pokemon.name}`}
+                               alt={`Picture of ${pokemon.name}`} unoptimized
                                width={50} height={0} style={{width: 'auto', height: '30px'}}/>
 
                         <div className="capitalize">{pokemon.name}</div>
