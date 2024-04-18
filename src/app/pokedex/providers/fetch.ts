@@ -77,7 +77,7 @@ async function getPokemonEvolutionFromAPI(pokemonID: number): Promise<PokemonEvo
         evolveTo: [],
     }
 
-    const fetchSpecies = fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonID}`)
+    const fetchSpecies = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonID}`)
         .then((response) => {
             switch (response.status) {
                 case 404:
