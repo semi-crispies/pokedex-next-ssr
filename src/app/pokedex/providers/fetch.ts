@@ -68,7 +68,7 @@ function formatTypes(rawTypes: PokeapiTypes[]): string[] {
     return cleanTypes;
 }
 
-async function getPokemonEvolutionFromAPI(pokemonID: any): Promise<PokemonEvolution> {
+async function getPokemonEvolutionFromAPI(pokemonID: number): Promise<PokemonEvolution> {
 
     const evolutionChain: PokemonEvolution = {
         id: 0,
