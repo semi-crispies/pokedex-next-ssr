@@ -43,6 +43,15 @@ export const getPokemon = async (pokemonID: number, setPokemon: React.Dispatch<R
     const pokemonData = await fetchPokemon;
     const pokemonEvolution = await getPokemonEvolutionFromAPI(pokemonID);
 
+    //console.log(pokemonEvolution?.id);
+    //console.log(pokemonEvolution?.name)
+
+    // if (pokemonEvolution) {
+    //     console.log(pokemonEvolution?.name);
+    // } else {
+    //     console.log("Evolution NOT LOADED")
+    // }
+
     if (pokemonData && pokemonEvolution) {
         pokemonData.evolution = pokemonEvolution;
         setPokemon(pokemonData);
@@ -68,31 +77,49 @@ function formatTypes(rawTypes: PokeapiTypes[]): string[] {
     return cleanTypes;
 }
 
-async function getPokemonEvolutionFromAPI(pokemonID: number): Promise<PokemonEvolution> {
+const evolutionChainURL = async (pokemonID: number): Promise<string | any> => {
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonID}`);
+        switch (response.status) {
+            case 404:
+                throw new Error("404");
+        }
+        const json = await response.json();
+        return json.evolution_chain.url;
+    } catch (error) {
+        console.log(`Catch fetchSpecies : ${error}`);
+    }
+}
 
-    const evolutionChain: PokemonEvolution = {
+// const getPokemonInfoByName = async (pokemonName: string) => {
+//     try {
+//         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+//
+//         switch (response.status) {
+//             case 404:
+//                 throw new Error("404");
+//         }
+//         const json: Promise<Partial<PokemonEvolution>> = response.json();
+//
+//         return {
+//             id: json.id,
+//             //sprite: json.sprites.other.showdown.front_default,
+//         }
+//     } catch (error) {
+//         console.log(`Catch fetchPokemon : ${error}`);
+//     }
+// }
+
+async function getPokemonEvolutionFromAPI(pokemonID: number) {
+
+    const evolutionTree: PokemonEvolution = {
         id: 0,
         name: "",
         sprite: "",
         evolveTo: [],
     }
 
-    const fetchSpecies = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonID}`)
-        .then((response) => {
-            switch (response.status) {
-                case 404:
-                    throw new Error("404");
-            }
-            return response.json();
-        })
-        .then((json) => {
-            return json.evolution_chain.url;
-        })
-        .catch((error) => {
-            console.log(`Catch fetchSpecies : ${error}`);
-        })
-
-    fetch(await fetchSpecies)
+    return fetch(await evolutionChainURL(pokemonID))
         .then((response) => {
             switch (response.status) {
                 case 404:
@@ -103,10 +130,9 @@ async function getPokemonEvolutionFromAPI(pokemonID: number): Promise<PokemonEvo
         .then((json) => {
 
             // BASE
-            const pokemonName = json.chain.species.name;
-            evolutionChain.name = pokemonName;
+            evolutionTree.name = json.chain.species.name;
 
-            fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+            fetch(`https://pokeapi.co/api/v2/pokemon/${evolutionTree.name}`)
                 .then((response) => {
                     switch (response.status) {
                         case 404:
@@ -115,8 +141,8 @@ async function getPokemonEvolutionFromAPI(pokemonID: number): Promise<PokemonEvo
                     return response.json();
                 })
                 .then((json: PokeapiPkmn) => {
-                    evolutionChain.id = json.id;
-                    evolutionChain.sprite = json.sprites.other.showdown.front_default;
+                    evolutionTree.id = json.id;
+                    evolutionTree.sprite = json.sprites.other.showdown.front_default;
                 })
                 .catch((error) => {
                     console.log(`Catch fetchPokemon : ${error}`);
@@ -176,13 +202,13 @@ async function getPokemonEvolutionFromAPI(pokemonID: number): Promise<PokemonEvo
                         console.log(`Catch fetchPokemon : ${error}`);
                     });
 
-                evolutionChain.evolveTo.push(evoData);
+                evolutionTree.evolveTo.push(evoData);
             }
-
+            return evolutionTree
         })
         .catch((error) => {
             console.log(`Catch fetchEvolution : ${error}`);
         })
 
-    return evolutionChain;
+    //return evolutionTree;
 }
